@@ -28,19 +28,19 @@
                                 <tbody>
                                     <tr>
                                         <td>核心数</td>
-                                        <td th:text="${server.cpu.cpuNum}">0个</td>
+                                        <td th:text="${com.ruoyi.server.cpu.cpuNum}">0个</td>
                                     </tr>
                                     <tr>
                                         <td>用户使用率</td>
-                                        <td th:text="${server.cpu.used + '%'}">0%</td>
+                                        <td th:text="${com.ruoyi.server.cpu.used + '%'}">0%</td>
                                     </tr>
                                     <tr>
                                         <td>系统使用率</td>
-                                        <td th:text="${server.cpu.sys + '%'}">0%</td>
+                                        <td th:text="${com.ruoyi.server.cpu.sys + '%'}">0%</td>
                                     </tr>
                                     <tr>
                                         <td>当前空闲率</td>
-                                        <td th:text="${server.cpu.free + '%'}">0%</td>
+                                        <td th:text="${com.ruoyi.server.cpu.free + '%'}">0%</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -69,23 +69,23 @@
                                 <tbody>
                                     <tr>
                                         <td>总内存</td>
-                                        <td th:text="${server.mem.total + 'G'}">0GB</td>
-                                        <td th:text="${server.jvm.total + 'M'}">0MB</td>
+                                        <td th:text="${com.ruoyi.server.mem.total + 'G'}">0GB</td>
+                                        <td th:text="${com.ruoyi.server.jvm.total + 'M'}">0MB</td>
                                     </tr>
                                     <tr>
                                         <td>已用内存</td>
-                                        <td th:text="${server.mem.used + 'G'}">0GB</td>
-                                        <td th:text="${server.jvm.used + 'M'}">0MB</td>
+                                        <td th:text="${com.ruoyi.server.mem.used + 'G'}">0GB</td>
+                                        <td th:text="${com.ruoyi.server.jvm.used + 'M'}">0MB</td>
                                     </tr>
                                     <tr>
                                         <td>剩余内存</td>
-                                        <td th:text="${server.mem.free + 'G'}">0GB</td>
-                                        <td th:text="${server.jvm.free + 'M'}">0MB</td>
+                                        <td th:text="${com.ruoyi.server.mem.free + 'G'}">0GB</td>
+                                        <td th:text="${com.ruoyi.server.jvm.free + 'M'}">0MB</td>
                                     </tr>
                                     <tr>
                                         <td>使用率</td>
-                                        <td th:class="${server.mem.usage gt 80} ? 'text-danger'">[[${server.mem.usage}]]%</td>
-                                        <td th:class="${server.jvm.usage gt 80} ? 'text-danger'">[[${server.jvm.usage}]]%</td>
+                                        <td th:class="${com.ruoyi.server.mem.usage gt 80} ? 'text-danger'">[[${com.ruoyi.server.mem.usage}]]%</td>
+                                        <td th:class="${com.ruoyi.server.jvm.usage gt 80} ? 'text-danger'">[[${com.ruoyi.server.jvm.usage}]]%</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -115,15 +115,15 @@
                                         <tbody>
                                             <tr>
                                                 <td>服务器名称</td>
-                                                <td th:text="${server.sys.computerName}">RuoYi</td>
+                                                <td th:text="${com.ruoyi.server.sys.computerName}">RuoYi</td>
                                                 <td>操作系统</td>
-                                                <td th:text="${server.sys.osName}">Linux</td>
+                                                <td th:text="${com.ruoyi.server.sys.osName}">Linux</td>
                                             </tr>
                                             <tr>
                                                 <td>服务器IP</td>
-                                                <td th:text="${server.sys.computerIp}">127.0.0.1</td>
+                                                <td th:text="${com.ruoyi.server.sys.computerIp}">127.0.0.1</td>
                                                 <td>系统架构</td>
-                                                <td th:text="${server.sys.osArch}">amd64</td>
+                                                <td th:text="${com.ruoyi.server.sys.osArch}">amd64</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -156,23 +156,23 @@
                                         <tbody>
                                             <tr>
                                                 <td>Java名称</td>
-                                                <td th:text="${server.jvm.name}">Java</td>
+                                                <td th:text="${com.ruoyi.server.jvm.name}">Java</td>
                                                 <td>Java版本</td>
-                                                <td th:text="${server.jvm.version}">1.8.0</td>
+                                                <td th:text="${com.ruoyi.server.jvm.version}">1.8.0</td>
                                             </tr>
                                             <tr>
                                                 <td>启动时间</td>
-                                                <td th:text="${server.jvm.startTime}">2018-12-31 00:00:00</td>
+                                                <td th:text="${com.ruoyi.server.jvm.startTime}">2018-12-31 00:00:00</td>
                                                 <td>运行时长</td>
-                                                <td th:text="${server.jvm.runTime}">0天0时0分0秒</td>
+                                                <td th:text="${com.ruoyi.server.jvm.runTime}">0天0时0分0秒</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="1">安装路径</td>
-                                                <td colspan="3" th:text="${server.jvm.home}"></td>
+                                                <td colspan="3" th:text="${com.ruoyi.server.jvm.home}"></td>
                                             </tr>
                                              <tr>
                                                 <td colspan="1">项目路径</td>
-                                                <td colspan="3" th:text="${server.sys.userDir}"></td>
+                                                <td colspan="3" th:text="${com.ruoyi.server.sys.userDir}"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -214,7 +214,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="sysFile : ${server.sysFiles}">
+                                            <tr th:each="sysFile : ${com.ruoyi.server.sysFiles}">
                                                 <td th:text="${sysFile.dirName}">C:\</td>
                                                 <td th:text="${sysFile.sysTypeName}">NTFS</td>
                                                 <td th:text="${sysFile.typeName}">local</td>

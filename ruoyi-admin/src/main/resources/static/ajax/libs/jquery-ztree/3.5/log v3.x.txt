@@ -67,7 +67,7 @@
    * 【修改】初始化时 多层父节点的 checkbox 半选状态计算错误的 bug
    * 【修改】同时选中父、子节点后，利用 getSelectedNodes 获取选中节点并利用 removeNode 删除时报错的 bug
    * 【修改】treeNode.chkDisabled / nocheck 属性，支持字符串格式的 "false"/"true"
-   * 【修改】异步加载模式下无法利用 server 返回 xml 并且 在 dataFilter 中继续处理的 bug
+   * 【修改】异步加载模式下无法利用 com.ruoyi.server 返回 xml 并且 在 dataFilter 中继续处理的 bug
    * 【修改】title 只允许设置为 string 类型值的问题。 修正后允许设置为 number 类型的值
    * 【修改】zId 计数规则 & Cache 保存，减少 IE9 的 bug 造成的内存泄漏
    * 【修改】API 页面搜索功能导致 IE 崩溃的 bug

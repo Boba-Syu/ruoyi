@@ -14,18 +14,18 @@ import com.ruoyi.framework.web.domain.Server;
  * @author ruoyi
  */
 @Controller
-@RequestMapping("/monitor/server")
+@RequestMapping("/monitor/com.ruoyi.server")
 public class ServerController extends BaseController
 {
-    private String prefix = "monitor/server";
+    private String prefix = "monitor/com.ruoyi.server";
 
-    @RequiresPermissions("monitor:server:view")
+    @RequiresPermissions("monitor:com.ruoyi.server:view")
     @GetMapping()
     public String server(ModelMap mmap) throws Exception
     {
         Server server = new Server();
         server.copyTo();
-        mmap.put("server", server);
-        return prefix + "/server";
+        mmap.put("com.ruoyi.server", server);
+        return prefix + "/com.ruoyi.server";
     }
 }

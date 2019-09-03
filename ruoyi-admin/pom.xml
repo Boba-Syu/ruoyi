@@ -73,6 +73,12 @@
             <artifactId>ruoyi-generator</artifactId>
         </dependency>
 
+        <!-- 聊天室-->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>boba-chat</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
