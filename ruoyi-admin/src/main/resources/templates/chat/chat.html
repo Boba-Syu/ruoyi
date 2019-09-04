@@ -24,15 +24,10 @@
             window.WebSocket = window.MozWebSocket;
         }
         if (window.WebSocket) {
-            socket = new WebSocket("ws://localhost:8888/websocket");
+            socket = new WebSocket("ws://http://47.97.90.166:8888/websocket");
             socket.onmessage = function (event) {
                 var str = String(event.data).split("#");
-                var style;
-                if (str[1].equals($.trim($('#name1').val()))) {
-                    style = "right";
-                } else {
-                    style = "left";
-                }
+                //console.log(str);
                 var html =
                     '<div class="chat-message">' +
                     '<div class="message">' +
@@ -44,6 +39,7 @@
                 $("#chat").append(html);
             };
             socket.onopen = function (event) {
+
             };
             socket.onclose = function (event) {
                 alert('连接已断开');
@@ -65,67 +61,20 @@
             else
                 str += "test#" + $.trim($("#text1").val());
             socket.send(str);
-            init();
-        }
-        function users() {
-            $.ajax({
-                type: "POST",
-                url: "/system/user/list",
-                dataType: "json",
-                success: function (data) {
-                    var names = data.rows;
-                    console.log(names);
-                    console.log(data.rows[0].userName);
-                    var str = '';
-                    for (var i in names) {
-                        var n = '';
-                        if (names[i].status == 0)
-                            n = '<span class="pull-right label label-primary">状态: 正常</span>';
-                        else
-                            n = '<span class="pull-right label label-error" >状态: 停用</span>';
-                        str +=
-                            '<div class="chat-user"> ' + n +
-                            '<div class="chat-user-name"> ' +
-                            '<a href="#">' + names[i].userName + '</a> ' +
-                            '</div>' +
-                            '</div>';
-                    }
-                    $("#users").html(str);
-                }
-            });
-        }
-        function init() {
-            $("#chat").html("");
-            $.ajax({
-                type: "GET",
-                url: "/broad/chat/msg",
-                dataType: "json",
-                success: function (data) {
-                    console.log(data);
-                    for (var i = 0; i < data.length; i++) {
-                        var d = data[i];
-                        var str = String(d).split("#");
-                        if (str[1] == $.trim($('#name1').val())) {
-                            style = "right";
-                        } else {
-                            style = "left";
-                        }
-                        var html =
-                            '<div class="chat-message">' +
-                            '<div class="message">' +
-                            '<a class="message-author" href="#"> ' + str[1] + '</a>' +
-                            '<span class="message-date"> ' + str[0] + '</span>' +
-                            '<span class="message-content">' + str[2] + '</span>' +
-                            '</div>' +
-                            '</div>';
-                        $("#chat").append(html);
-                    }
-                }
-            })
+            var str2 = String(str).split("#");
+            /*var html =
+                '<div class="chat-message">' +
+                '<div class="message">' +
+                '<a class="message-author"> ' + str2[1] + '</a>' +
+                '<span class="message-date"> ' + str2[0] + '</span>' +
+                '<span class="message-content">' + str2[2] + '</span>' +
+                '</div>' +
+                '</div>';
+            $("#chat").append(html);*/
         }
     </script>
 </head>
-<body onload="users();init();">
+<body onload="">
 <div class="wrapper wrapper-content  animated fadeInRight">
     <div class="row">
         <div class="col-sm-12">
