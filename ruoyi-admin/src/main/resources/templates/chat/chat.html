@@ -12,8 +12,6 @@
     <link th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
     <!-- Morris -->
     <link th:href="@{/css/plugins/morris/morris-0.4.3.min.css}" rel="stylesheet">
-    <!-- Gritter -->
-    <link th:href="@{/js/plugins/gritter/jquery.gritter.css}" rel="stylesheet">
     <!--js-->
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>
@@ -23,6 +21,7 @@
         }
         if (window.WebSocket) {
             socket = new WebSocket("ws://47.97.90.166:8888/websocket");
+            //socket = new WebSocket("ws://127.0.0.1:8888/websocket");
             socket.onmessage = function (event) {
                 var str = String(event.data).split("#");
                 //console.log(str);r
@@ -53,13 +52,20 @@
             return y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d) + " " + now.toTimeString().substr(0, 8);
         }
         function send() {
+            if($.trim($("#text1").val()) == null || $.trim($("#text1").val()) == '') {
+                alert("消息不能为空");
+                return;
+            }
             var str = getdate() + "#";
-            if ($.trim($('#name1').val()) != null || $.trim($('#name1').val()) != '')
+            if ($.trim($('#name1').val()) != null && $.trim($('#name1').val()) != '')
                 str += $.trim($('#name1').val()) + "#" + $.trim($("#text1").val());
-            else
-                str += "test#" + $.trim($("#text1").val());
-            socket.send(str);
+            else {
+                str += "匿名用户#" + $.trim($("#text1").val());
+            }
+                socket.send(str);
             var str2 = String(str).split("#");
+            var text1 = document.getElementById('text1');
+            text1.value = '';
             /*var html =
                 '<div class="chat-message">' +
                 '<div class="message">' +
@@ -85,7 +91,10 @@
                         </div>
                         <div class="col-md-3">
                             <div class="chat-users" style="height: 500px">
-                                <div class="users-list" id="users"></div>
+                                <h1 style="text-align: center;color: #0980ff">公告</h1>
+                                <h3>
+                                    &emsp;&emsp;该聊天室只是一个学生的练习项目, 有很多的问题, 敬请谅解.
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -97,7 +106,7 @@
         <div class="col-sm-12">
             <div class="chat-message-form">
                 <div class="form-group">
-                    <input type="hidden" id="name1" th:value="${session.userName}">
+                    <input type="text" id="name1" class="form-control" placeholder="输入姓名"/>
                     <textarea class="form-control message-input" id="text1" name="message"
                               placeholder="输入消息内容"></textarea>
                 </div>

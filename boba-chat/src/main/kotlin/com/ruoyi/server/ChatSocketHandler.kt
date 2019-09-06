@@ -19,6 +19,7 @@ class ChatSocketHandler : SimpleChannelInboundHandler<Any>() {
     private var handshaker: WebSocketServerHandshaker? = null
     private val port = 8888
     private val url = "ws://47.97.90.166:$port/websocket"
+    //private val url = "ws://127.0.0.1:$port/websocket"
 
     companion object {
         var group: ChannelGroup = DefaultChannelGroup(GlobalEventExecutor.INSTANCE)
