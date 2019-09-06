@@ -161,7 +161,7 @@ class ChatSocketHandler : SimpleChannelInboundHandler<Any>() {
         ctx.flush()
     }
 
-    private fun insertToRedis(msg: String) {
+    @Synchronized private fun insertToRedis(msg: String) {
         val jedis = ChatRedisFactory.jedis
         var len: Int = jedis.get(ChatRedisFactory.CHAT_LIST_LENGTH).toInt() + 1
         jedis.set(ChatRedisFactory.CHAT_LIST_LENGTH, len.toString())
