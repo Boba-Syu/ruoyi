@@ -1,5 +1,6 @@
 package com.ruoyi.server
 
+import com.ruoyi.redis.ChatRedisFactory
 import io.netty.buffer.Unpooled
 import io.netty.channel.ChannelFutureListener
 import io.netty.channel.ChannelHandlerContext
@@ -83,6 +84,7 @@ class ChatSocketHandler : SimpleChannelInboundHandler<Any>() {
                 } else {
                     channel.writeAndFlush(TextWebSocketFrame(frame.text()))
                 }
+                insertToRedis(frame.text())
             }
         }
     }
@@ -157,6 +159,13 @@ class ChatSocketHandler : SimpleChannelInboundHandler<Any>() {
     @Throws(Exception::class)
     override fun channelReadComplete(ctx: ChannelHandlerContext) {
         ctx.flush()
+    }
+
+    private fun insertToRedis(msg: String) {
+        val jedis = ChatRedisFactory.jedis
+        var len: Int = jedis.get(ChatRedisFactory.CHAT_LIST_LENGTH).toInt() + 1
+        jedis.set(ChatRedisFactory.CHAT_LIST_LENGTH, len.toString())
+        jedis.lpush(ChatRedisFactory.CHAT_LIST, msg);
     }
 
 }

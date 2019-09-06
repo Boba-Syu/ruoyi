@@ -76,9 +76,33 @@
                 '</div>';
             $("#chat").append(html);*/
         }
+        function init() {
+            $("#chat").html("");
+            $.ajax({
+                type: "GET",
+                url: "/chat/chatList",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    for (var i = 0; i < data.length; i++) {
+                        var d = data[i];
+                        var str = String(d).split("#");
+                        var html =
+                            '<div class="chat-message">' +
+                            '<div class="message">' +
+                            '<a class="message-author" href="#"> ' + str[1] + '</a>' +
+                            '<span class="message-date"> ' + str[0] + '</span>' +
+                            '<span class="message-content">' + str[2] + '</span>' +
+                            '</div>' +
+                            '</div>';
+                        $("#chat").append(html);
+                    }
+                }
+            })
+        }
     </script>
 </head>
-<body onload="">
+<body onload="init()">
 <div class="wrapper wrapper-content  animated fadeInRight">
     <div class="row">
         <div class="col-sm-12">
